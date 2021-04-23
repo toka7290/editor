@@ -1,0 +1,10 @@
+{
+	"id": "itemTag",
+	"scope": "DP/data/*/tags/items/",
+	"icon": "mdi-",
+	"matcher": [
+		"DP/data/*/tags/items/*.json",
+		"DP/data/*/tags/items/**/*.json"
+	],
+	"schema": "file:///data/packages/minecraftJava/schema/"
+}

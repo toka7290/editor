@@ -1,0 +1,10 @@
+{
+	"id": "fluidTag",
+	"scope": "DP/data/*/tags/fluids/",
+	"icon": "mdi-",
+	"matcher": [
+		"DP/data/*/tags/fluids/*.json",
+		"DP/data/*/tags/fluids/**/*.json"
+	],
+	"schema": "file:///data/packages/minecraftJava/schema/"
+}

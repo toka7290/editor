@@ -1,0 +1,10 @@
+{
+	"id": "blockTag",
+	"scope": "DP/data/*/tags/blocks/",
+	"icon": "mdi-",
+	"matcher": [
+		"DP/data/*/tags/blocks/*.json",
+		"DP/data/*/tags/blocks/**/*.json"
+	],
+	"schema": "file:///data/packages/minecraftJava/schema/"
+}

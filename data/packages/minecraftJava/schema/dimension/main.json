@@ -1,0 +1,135 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema",
+	"title": "Dimension",
+	"additionalProperties": false,
+	"properties": {
+		"type": {
+			"description": "The namespaced ID of the dimension type. Can be a preset, or a custom dimension type.",
+			"anyOf": [
+				{
+					"type": "string",
+					"enum": [
+						"minecraft:overworld",
+						"minecraft:overworld_caves",
+						"minecraft:the_nether",
+						"minecraft:the_end"
+					]
+				},
+				{
+					// TODO DIMENSION_TYPE
+				}
+			]
+		},
+		"generator": {
+			"description": "Generation settings used for that dimension.",
+			"allOf": [
+				{
+					"properties": {
+						"type": {
+							"description": "The ID of the generator.",
+							"type": "string",
+							"enum": [
+								"minecraft:flat",
+								"minecraft:noise",
+								"minecraft:debug"
+							]
+						}
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": {
+								"const": "minecraft:noise"
+							}
+						}
+					},
+					"then": {
+						"properties": {
+							"seed": {
+								"description": "The seed used to generate the dimension. In most cases, this is exactly the same as the world seed, but can be different and the dimension generated is based upon this seed and not the world seed.",
+								"type": "integer"
+							},
+							"settings": {
+								"description": "The noise settings used in the terrain generator. Can be set to a string to use a preset defined in the worldgen/noise_settings folder with a list of customized options.",
+								"anyOf": [
+									{
+										"type": "object"
+										// TODO NOISE_SETTINGS_FORMAT
+									},
+									{
+										"type": "string"
+										// TODO NOISE_SETTINGS_NAME
+									}
+								]
+							},
+							"biome_source": {
+								"description": "Settings dictating which biomes and biome shapes.",
+								"allOf": [
+									{
+										"properties": {
+											"seed": {
+												"type": "integer",
+												"description": "The seed used for biome generation. In most cases, this is exactly the same as the dimension seed (and by extension the world seed), but can be different and the biome generation for this dimension is based upon this seed and not the dimension seed."
+											},
+											"biomes": {
+												"description": "A list of biome IDs to generate.",
+												"type": "array",
+												"items": {
+													"type": "string" // TODO BIOME_ID
+												}
+											},
+											"type": {
+												"type": "string",
+												"enum": [
+													"minecraft:vanilla_layered",
+													"minecraft:fixed",
+													"minecraft:checkerboard",
+													"minecraft:multi_noise",
+													"minecraft:the_end"
+												]
+											}
+										}
+									},
+									{
+										"if": {
+											"properties": {
+												"type": {
+													"const": "minecraft:vanilla_layered"
+												}
+											}
+										},
+										"then": {
+											"properties": {
+												"large_biomes": {
+													"description": "Whether the biomes are large. True for biomes generation in the 'Large Biomes' world type.",
+													"type": "boolean"
+												},
+												"legacy_biome_init_layer": {
+													"description": "Whether the world was default_1_1.",
+													"type": "boolean"
+												}
+											}
+										}
+									} // TODO FINISH THIS https://minecraft.fandom.com/wiki/Custom_dimension
+								]
+							}
+						}
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": {
+								"const": "minecraft:flat"
+							}
+						}
+					},
+					"then": {
+						"properties": {}
+					}
+				}
+			]
+		}
+	}
+}

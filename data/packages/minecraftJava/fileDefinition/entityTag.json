@@ -1,0 +1,10 @@
+{
+	"id": "entityTag",
+	"scope": "DP/data/*/tags/entity_types/",
+	"icon": "mdi-",
+	"matcher": [
+		"DP/data/*/tags/entity_types/*.json",
+		"DP/data/*/tags/entity_types/**/*.json"
+	],
+	"schema": "file:///data/packages/minecraftJava/schema/"
+}
