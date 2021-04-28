@@ -3,5 +3,5 @@
 	"scope": "DP/data/*/worldgen/dimension/",
 	"icon": "mdi-",
 	"matcher": "DP/data/*/worldgen/dimension/*.json",
-	"schema": "file:///data/packages/minecraftJava/schema/"
+	"schema": "file:///data/packages/minecraftJava/schema/dimension/main.json"
 }
