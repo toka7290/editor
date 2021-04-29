@@ -81,7 +81,7 @@
 							"properties": {
 								"trigger": {
 									"description": "The trigger for this advancement; specifies what the game should check for the advancement.",
-									"$ref": "./trigger.json"
+									"$ref": "./general/trigger.json"
 								}
 							}
 						},
@@ -210,6 +210,288 @@
 													"type": "string" // TODO PREDICATES
 												}
 											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:changed_dimension"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"from": {
+												"description": "The dimension the entity traveled from.",
+												"type": "string",
+												"enum": [
+													"minecraft:overworld",
+													"minecraft:the_nether",
+													"minecraft:the_end"
+												]
+											},
+											"to": {
+												"description": "The dimension the entity traveled to.",
+												"type": "string",
+												"enum": [
+													"minecraft:overworld",
+													"minecraft:the_nether",
+													"minecraft:the_end"
+												]
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													"type": "string" // TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:channeled_lightning"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"victims": {
+												"description": "The victims hit by the lightning summoned by the Channeling enchantment. All entities in this list must be hit. Each entry may also be a list of predicates that must pass in order for the trigger to activate. The checks are applied to the victim hit by the enchanted trident.",
+												"type": "array",
+												"items": {
+													"$ref": "./general/entityProperties.json"
+												}
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATE
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:construct_beacon"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"level": {
+												"anyOf": [
+													{
+														"type": "integer"
+													},
+													{
+														"properties": {
+															"max": {
+																"type": "integer"
+															},
+															"min": {
+																"type": "integer"
+															}
+														}
+													}
+												]
+											},
+											"player": {
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:consume_item"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"item": {
+												"description": "The item that was consumed.",
+												"$ref": "./general/itemProperties.json"
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:cured_zombie_villager"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"villager": {
+												"anyOf": [
+													{
+														"$ref": "./general/entityProperties.json"
+													},
+													{
+														"type": "array",
+														"items": {
+															"$ref": "./general/entityProperties.json"
+														}
+													}
+												]
+											},
+											"zombie": {
+												"anyOf": [
+													{
+														"$ref": "./general/entityProperties.json"
+													},
+													{
+														"type": "array",
+														"items": {
+															"$ref": "./general/entityProperties.json"
+														}
+													}
+												]
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:effects_changed"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"effects": {
+												"description": "A list of status effects the player has.",
+												"propertyNames": {
+													// TODO EFFECT_NAME
+												},
+												"patternProperties": {
+													".+": {
+														"description": "A status effect with the key name being the status effect name.",
+														"properties": {
+															"amplifier": {
+																"description": "The effect amplifier.",
+																"anyOf": [
+																	{
+																		"type": "integer"
+																	},
+																	{
+																		"properties": {
+																			"max": {
+																				"type": "integer"
+																			},
+																			"min": {
+																				"type": "integer"
+																			}
+																		}
+																	}
+																]
+															},
+															"duration": {
+																"description": "The effect duration in ticks.",
+																"anyOf": [
+																	{
+																		"type": "integer"
+																	},
+																	{
+																		"properties": {
+																			"max": {
+																				"type": "integer"
+																			},
+																			"min": {
+																				"type": "integer"
+																			}
+																		}
+																	}
+																]
+															}
+														}
+													}
+												}
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:enchanted_item"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											// TODO
 										}
 									}
 								}
