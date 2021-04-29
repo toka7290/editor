@@ -3,5 +3,5 @@
 	"scope": "DP/data/*/recipes",
 	"icon": "mdi-",
 	"matcher": ["DP/data/*/recipes/*.json", "DP/data/*/recipes/**/*.json"],
-	"schema": "file:///data/packages/minecraftJava/schema/"
+	"schema": "file:///data/packages/minecraftJava/schema/recipe/main.json"
 }
