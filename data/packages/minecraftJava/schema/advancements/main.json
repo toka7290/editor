@@ -16,8 +16,8 @@
 							"type": "string" // TODO ITEM_IDENTIFIER
 						},
 						"nbt": {
-							"description": "The nbt data of the item."
-							// TODO NBT_DATA
+							"description": "The nbt data of the item.",
+							"type": "string"
 						}
 					}
 				},
@@ -491,7 +491,1236 @@
 								"properties": {
 									"conditions": {
 										"properties": {
-											// TODO
+											"item": {
+												"description": "The item after it has been enchanted.",
+												"$ref": "./general/itemProperties.json"
+											},
+											"levels": {
+												"description": "The levels spent by the player on the enchantment.",
+												"anyOf": [
+													{
+														"type": "integer"
+													},
+													{
+														"type": "array",
+														"items": {
+															"properties": {
+																"max": {
+																	"type": "integer"
+																},
+																"min": {
+																	"type": "integer"
+																}
+															}
+														}
+													}
+												]
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:enter_block"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"block": {
+												"description": "The block that the player is standing in.",
+												"type": "string" // TODO BLOCK_ID
+											},
+											"state": {
+												"description": "The block states of the block."
+												// TODO BLOCK_STATES
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:entity_hurt_player"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"damage": {
+												"description": "Checks the damage done to the player. Missing corresponding list of predicates.",
+												"$ref": "./general/damageProperties.json"
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:entity_killed_player"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"entity": {
+												"description": "Checks the entity that was the source of the damage that killed the player (for example: The skeleton that shot the arrow). May also be a list of predicates that must pass in order for the trigger to activate.",
+												"$ref": "./general/entityProperties.json"
+											},
+											"killing_blow": {
+												"description": "Checks the type of damage that killed the player. Missing corresponding list of predicates for the direct entity.",
+												"$ref": "./general/damageProperties.json"
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:filled_bucket"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"item": {
+												"description": "The item resulting from filling the bucket.",
+												"$ref": "./general/itemProperties.json"
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:fishing_rod_hooked"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"entity": {
+												"description": "The entity that was pulled. May also be a list of predicates that must pass in order for the trigger to activate.",
+												"$ref": "./general/entityProperties.json"
+											},
+											"item": {
+												"description": "The item that was caught.",
+												"$ref": "./general/itemProperties.json"
+											},
+											"rod": {
+												"description": "The fishing rod used.",
+												"$ref": "./general/itemProperties.json"
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:hero_of_the_village"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"location": {
+												"description": "The location of the player.",
+												"$ref": "./general/locationProperties.json"
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:inventory_changed"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"items": {
+												"description": "A list of items in the player's inventory. All items in the list must be in the player's inventory, but not all items in the player's inventory have to be in this list.",
+												"type": "array",
+												"items": {
+													"$ref": "./general/itemProperties.json"
+												}
+											},
+											"slots": {
+												"properties": {
+													"empty": {
+														"description": "The amount of slots empty in the inventory.",
+														"anyOf": [
+															{
+																"type": "integer"
+															},
+															{
+																"type": "object",
+																"properties": {
+																	"max": {
+																		"type": "integer"
+																	},
+																	"min": {
+																		"type": "integer"
+																	}
+																}
+															}
+														]
+													},
+													"full": {
+														"description": "The amount of slots completely filled (stacksize) in the inventory.",
+														"anyOf": [
+															{
+																"type": "integer"
+															},
+															{
+																"type": "object",
+																"properties": {
+																	"max": {
+																		"type": "integer"
+																	},
+																	"min": {
+																		"type": "integer"
+																	}
+																}
+															}
+														]
+													},
+													"occupied": {
+														"description": "The amount of slots occupied in the inventory.",
+														"anyOf": [
+															{
+																"type": "integer"
+															},
+															{
+																"type": "object",
+																"properties": {
+																	"max": {
+																		"type": "integer"
+																	},
+																	"min": {
+																		"type": "integer"
+																	}
+																}
+															}
+														]
+													}
+												}
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:item_durability_changed"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"delta": {
+												"description": "The change in durability (negative numbers are used to indicate a decrease in durability).",
+												"anyOf": [
+													{
+														"type": "integer"
+													},
+													{
+														"type": "object",
+														"properties": {
+															"max": {
+																"type": "integer"
+															},
+															"min": {
+																"type": "integer"
+															}
+														}
+													}
+												]
+											},
+											"durability": {
+												"description": "The remaining durability of the item.",
+												"anyOf": [
+													{
+														"type": "integer"
+													},
+													{
+														"type": "object",
+														"properties": {
+															"max": {
+																"type": "integer"
+															},
+															"min": {
+																"type": "integer"
+															}
+														}
+													}
+												]
+											},
+											"item": {
+												"description": "The item before it was damaged, allows you to check the durability before the item was damaged.",
+												"$ref": "./general/itemProperties.json"
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:item_used_on_block"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"location": {
+												"description": "The location at the center of the block the item was used on.",
+												"$ref": "./general/locationProperties.json"
+											},
+											"item": {
+												"description": "The item used on the block.",
+												"$ref": "./general/itemProperties.json"
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:killed_by_crossbow"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"unique_entity_types": {
+												"description": " The exact count of types of entities killed.",
+												"anyOf": [
+													{
+														"type": "integer"
+													},
+													{
+														"type": "object",
+														"properties": {
+															"max": {
+																"type": "integer"
+															},
+															"min": {
+																"type": "integer"
+															}
+														}
+													}
+												]
+											},
+											"victims": {
+												"anyOf": [
+													{
+														"description": "A list of predicates for any of the killed entities. All of the predicates must be matched, and one killed entity may match only one predicate.",
+														"type": "array",
+														"items": {
+															"$ref": "./general/entityProperties.json"
+														}
+													},
+													{
+														"description": "A predicate for any of the killed entities.",
+														"$ref": "./general/entityProperties.json"
+													}
+												]
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:levitation"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"distance": {
+												"additionalProperties": false,
+												"properties": {
+													"absolute": {
+														"properties": {
+															"max": {
+																"type": "integer"
+															},
+															"min": {
+																"type": "integer"
+															}
+														}
+													},
+													"horizontal": {
+														"properties": {
+															"max": {
+																"type": "integer"
+															},
+															"min": {
+																"type": "integer"
+															}
+														}
+													},
+													"x": {
+														"properties": {
+															"max": {
+																"type": "integer"
+															},
+															"min": {
+																"type": "integer"
+															}
+														}
+													},
+													"y": {
+														"properties": {
+															"max": {
+																"type": "integer"
+															},
+															"min": {
+																"type": "integer"
+															}
+														}
+													},
+													"z": {
+														"properties": {
+															"max": {
+																"type": "integer"
+															},
+															"min": {
+																"type": "integer"
+															}
+														}
+													}
+												}
+											},
+											"duration": {
+												"description": "The duration of the levitation in ticks.",
+												"anyOf": [
+													{
+														"type": "integer"
+													},
+													{
+														"type": "object",
+														"properties": {
+															"max": {
+																"type": "integer"
+															},
+															"min": {
+																"type": "integer"
+															}
+														}
+													}
+												]
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:location"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"location": {
+												"description": "The location of the player.",
+												"$ref": "./general/locationProperties.json"
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:nether_travel"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"entered": {
+												"description": "The location where the player entered the Nether.",
+												"$ref": "./general/locationProperties.json"
+											},
+											"exited": {
+												"description": "The location where the player exited the Nether.",
+												"$ref": "./general/locationProperties.json"
+											},
+											"distance": {
+												"description": "The overworld distance between where the player entered the Nether and where the player exited the Nether.",
+												"properties": {
+													"absolute": {
+														"properties": {
+															"max": {
+																"type": "integer"
+															},
+															"min": {
+																"type": "integer"
+															}
+														}
+													},
+													"horizontal": {
+														"properties": {
+															"max": {
+																"type": "integer"
+															},
+															"min": {
+																"type": "integer"
+															}
+														}
+													},
+													"x": {
+														"properties": {
+															"max": {
+																"type": "integer"
+															},
+															"min": {
+																"type": "integer"
+															}
+														}
+													},
+													"y": {
+														"properties": {
+															"max": {
+																"type": "integer"
+															},
+															"min": {
+																"type": "integer"
+															}
+														}
+													},
+													"z": {
+														"properties": {
+															"max": {
+																"type": "integer"
+															},
+															"min": {
+																"type": "integer"
+															}
+														}
+													}
+												}
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:placed_block"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"block": {
+												"description": " The block that was placed.",
+												"type": "string" // TODO BLOCK_ID
+											},
+											"item": {
+												"description": "The item that was used to place the block before the item was consumed.",
+												"$ref": "./general/itemProperties.json"
+											},
+											"location": {
+												"description": "The location of the block that was placed.",
+												"$ref": "./general/locationProperties.json"
+											},
+											"state": {
+												"description": "The block states of the block."
+												// TODO BLOCK_STATES
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:player_generates_container_loot"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"loot_table": {
+												"description": "The resource location of the generated loot table.",
+												"type": "string" // TODO LOOT_TABLE
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:player_hurt_entity"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"damage": {
+												"description": "The damage that was dealt. Missing corresponding list of predicates for the direct entity.",
+												"$ref": "./general/damageProperties.json"
+											},
+											"entity": {
+												"description": "The entity that was damaged. May be a list of predicates that must pass in order for the trigger to activate.",
+												"$ref": "./general/entityProperties.json"
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:player_interacted_with_entity"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"condititons": {
+										"properties": {
+											"item": {
+												"description": "The item which was in the player's hand during interaction.",
+												"$ref": "./general/itemProperties.json"
+											},
+											"entity": {
+												"description": "The entity which was interacted with. May be a list of predicates that must pass in order for the trigger to activate.",
+												"$ref": "./general/entityProperties.json"
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:player_killed_entity"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"entity": {
+												"description": "The entity that was killed. May be a list of predicates that must pass in order for the trigger to activate.",
+												"$ref": "./general/entityProperties.json"
+											},
+											"killing_blow": {
+												"description": "The type of damage that killed an entity. Missing corresponding list of predicates for the direct entity.",
+												"$ref": "./general/damageType.json"
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:recipe_unlocked"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"recipe": {
+												"description": "The recipe that was unlocked.",
+												"type": "string" // TODO RECIPE
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:shot_crossbow"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"item": {
+												"description": "The item that was used.",
+												"$ref": "./general/itemProperties.json"
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:slept_in_bed"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"location": {
+												"description": "The location of the player.",
+												"$ref": "./general/locationProperties.json"
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:slide_down_block"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"block": {
+												"description": "The block that the player slid on.",
+												"type": "string" // TODO BLOCK
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:summoned_entity"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"entity": {
+												"description": "The summoned entity. May be a list of predicates that must pass in order for the trigger to activate.",
+												"$ref": "./general/entityProperties.json"
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:tame_animal"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"entity": {
+												"description": "Checks the entity that was tamed. May be a list of predicates that must pass in order for the trigger to activate.",
+												"$ref": "./general/entityProperties.json"
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:target_hit"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"signal_strength": {
+												"description": "The redstone signal that will come out of the target block."
+											},
+											"projectile": {
+												"description": "The projectile used to hit the target block.",
+												"type": "string" // TODO ENTITY_ID ?
+											},
+											"shooter": {
+												"description": "Entity predicate for the player who shot or threw the projectile. May be a list of loot table conditions that must pass in order for the trigger to activate.",
+												"$ref": "./general/entityProperties.json"
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:thrown_item_picked_up_by_entity"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"item": {
+												"description": "The thrown item which was picked up.",
+												"$ref": "./general/itemProperties.json"
+											},
+											"entity": {
+												"description": "The entity which picked up the item. May be a list of predicates that must pass in order for the trigger to activate.",
+												"$ref": "./general/entityProperties.json"
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:tick"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:used_ender_eye"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"distance": {
+												"description": "The horizontal distance between the player and the stronghold.",
+												"anyOf": [
+													{
+														"type": "integer"
+													},
+													{
+														"properties": {
+															"max": {
+																"type": "integer"
+															},
+															"min": {
+																"type": "integer"
+															}
+														}
+													}
+												]
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:used_totem"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"item": {
+												"description": "The item, only works with totem items.",
+												"$ref": "./general/itemProperties.json"
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:villager_trade"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"item": {
+												"description": "The item that was purchased. The 'count' tag checks the count from one trade, not multiple.",
+												"$ref": "./general/itemProperties.json"
+											},
+											"villager": {
+												"description": "The villager the item was purchased from. May be a list of predicates that must pass in order for the trigger to activate.",
+												"$ref": "./general/entityProperties.json"
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"trigger": {
+										"const": "minecraft:voluntary_exile"
+									}
+								}
+							},
+							"then": {
+								"properties": {
+									"conditions": {
+										"properties": {
+											"location": {
+												"description": "The location of the player.",
+												"$ref": "./general/locationProperties.json"
+											},
+											"player": {
+												"description": "A list of predicates that must pass in order for the trigger to activate. The checks are applied to the player that would get the advancement.",
+												"type": "array",
+												"items": {
+													// TODO PREDICATES
+												}
+											}
 										}
 									}
 								}

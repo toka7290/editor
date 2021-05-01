@@ -176,7 +176,7 @@
 		},
 		"nbt": {
 			"description": "An NBT string.",
-			"type": "string" // TODO NBT
+			"type": "string"
 		},
 		"player": {
 			"description": "Player properties to be checked. Fails when entity is not a player.",
